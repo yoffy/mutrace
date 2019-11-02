@@ -1534,6 +1534,8 @@ static int light_backtrace(void **buffer, int size) {
 static struct stacktrace_info generate_stacktrace(void) {
         struct stacktrace_info stacktrace;
 
+        memset(&stacktrace, 0, sizeof(stacktrace));
+
         stacktrace.frames = calloc(frames_max, sizeof(void*));
         assert(stacktrace.frames);
 
