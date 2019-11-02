@@ -68,6 +68,9 @@
 
 #define FP_NS_PER_MS 1000000.0
 
+//#define MUTRACE_GLIBC_VERSION "GLIBC_2.3.2"
+#define MUTRACE_GLIBC_VERSION "GLIBC_2.17"
+
 struct stacktrace_info {
         void **frames;
         int nb_frame;
@@ -503,12 +506,12 @@ static void load_functions(void) {
         /* There's some kind of weird incompatibility problem causing
          * pthread_cond_timedwait() to freeze if we don't ask for this
          * explicit version of these functions */
-        LOAD_FUNC_VERSIONED(pthread_cond_init, "GLIBC_2.3.2");
-        LOAD_FUNC_VERSIONED(pthread_cond_destroy, "GLIBC_2.3.2");
-        LOAD_FUNC_VERSIONED(pthread_cond_signal, "GLIBC_2.3.2");
-        LOAD_FUNC_VERSIONED(pthread_cond_broadcast, "GLIBC_2.3.2");
-        LOAD_FUNC_VERSIONED(pthread_cond_wait, "GLIBC_2.3.2");
-        LOAD_FUNC_VERSIONED(pthread_cond_timedwait, "GLIBC_2.3.2");
+        LOAD_FUNC_VERSIONED(pthread_cond_init, MUTRACE_GLIBC_VERSION);
+        LOAD_FUNC_VERSIONED(pthread_cond_destroy, MUTRACE_GLIBC_VERSION);
+        LOAD_FUNC_VERSIONED(pthread_cond_signal, MUTRACE_GLIBC_VERSION);
+        LOAD_FUNC_VERSIONED(pthread_cond_broadcast, MUTRACE_GLIBC_VERSION);
+        LOAD_FUNC_VERSIONED(pthread_cond_wait, MUTRACE_GLIBC_VERSION);
+        LOAD_FUNC_VERSIONED(pthread_cond_timedwait, MUTRACE_GLIBC_VERSION);
 
 #if defined(MUTRACE_ISC_ENABLED)
         LOAD_FUNC(isc_rwlock_init);
